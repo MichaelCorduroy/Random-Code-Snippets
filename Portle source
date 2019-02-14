@@ -52,9 +52,9 @@ while not crashed:
     if x > 950:
         x = 950
     if y < 0:
-        y = 50
+        y = 0
     if x < 0:
-        x = 50
+        x = 0
     if y > 550:
         y = 500
     if event.type == pygame.KEYDOWN:
