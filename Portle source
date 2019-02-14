@@ -19,9 +19,9 @@ y_change = 0
 while not crashed:
     gameDisplay.fill((90,90,90))
     pygame.draw.rect(gameDisplay, (255,255,255),(x,y,50,50))
-   #orange portal
+#orange portal
     pygame.draw.rect(gameDisplay, (255,165,0),(100,200,70,70))
-   #blue portal
+#blue portal
     pygame.draw.rect(gameDisplay, (0,0,255),(800,300,70,70))
     pygame.display.update()
     for event in pygame.event.get():
@@ -50,14 +50,31 @@ while not crashed:
     y += y_change
     #borders
     if x > 950:
-        x = 0
-    if y < 0:
-        y = 550
-    if x < 0:
         x = 950
+    if y < 0:
+        y = 50
+    if x < 0:
+        x = 50
     if y > 550:
-        y = 0
-    if x < 150 and y < 250 and x > 80 and y > 180 :
-        x = 800
-        y = 300
+        y = 500
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_s and x < 150 and y < 250 and x > 80 and y > 180:
+            x = 800
+            y = 370
+        elif event.key == pygame.K_d and x < 150 and y < 250 and x > 80 and y > 180:
+            x = 870
+            y = 300
+        elif event.key == pygame.K_a and x < 150 and y < 250 and x > 80 and y > 180:
+            x = 730
+            y = 300
+        elif event.key == pygame.K_w and x < 150 and y < 250 and x > 80 and y > 180:
+            x = 800
+            y = 230
+        
     
+    
+           
+    clock.tick(60)
+    
+    
+
