@@ -23,6 +23,8 @@ while not crashed:
     pygame.draw.rect(gameDisplay, (255,165,0),(100,200,70,70))
 #blue portal
     pygame.draw.rect(gameDisplay, (0,0,255),(800,300,70,70))
+#line that you can't cross
+    pygame.draw.line(gameDisplay, (0,0,0),(500,0),(500,600),15)
     pygame.display.update()
     for event in pygame.event.get():
         #controls
@@ -37,9 +39,10 @@ while not crashed:
                 y_change = -5
             elif event.key == pygame.K_s:
                 y_change = 5
-            elif event.key == pygame.K_q:
-                y = 300
-                x = 500
+            #i have plans for this but it just messes with stuff now
+            #elif event.key == pygame.K_q:
+                #y = 300
+                #x = 500
         #when the keys are pressed the position of the sprite cannot change
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_a or event.key == pygame.K_d:
@@ -57,7 +60,13 @@ while not crashed:
         x = 0
     if y > 550:
         y = 550
+#line in middle that can't be crossed
+    if 460 > x > 450:
+        x = 450
+    if 500 < x < 510:
+        x = 510
     if event.type == pygame.KEYDOWN:
+#going into orange portal
         if event.key == pygame.K_s and x < 150 and y < 250 and x > 80 and y > 180:
             x = 800
             y = 370
@@ -70,10 +79,23 @@ while not crashed:
         elif event.key == pygame.K_w and x < 150 and y < 250 and x > 80 and y > 180:
             x = 800
             y = 230
+#going into blue portal
+        elif event.key == pygame.K_w and x < 850 and y < 350 and x > 780 and y > 280:
+            x = 100
+            y = 130
+        elif event.key == pygame.K_s and x < 850 and y < 350 and x > 780 and y > 280:
+            x = 100
+            y = 270
+        elif event.key == pygame.K_d and x < 850 and y < 350 and x > 780 and y > 280:
+            x = 170
+            y = 200
+        elif event.key == pygame.K_a and x < 850 and y < 350 and x > 780 and y > 280:
+            x = 30
+            y = 200
         
     
     
            
     clock.tick(60)
     
-
+    
