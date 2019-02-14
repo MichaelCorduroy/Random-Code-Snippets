@@ -56,7 +56,7 @@ while not crashed:
     if x < 0:
         x = 0
     if y > 550:
-        y = 500
+        y = 550
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_s and x < 150 and y < 250 and x > 80 and y > 180:
             x = 800
@@ -75,6 +75,5 @@ while not crashed:
     
            
     clock.tick(60)
-    
     
 
