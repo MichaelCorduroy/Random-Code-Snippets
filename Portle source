@@ -1,0 +1,58 @@
+import pygame
+
+pygame.init()
+
+display_width = 1000
+display_height = 600
+
+clock = pygame.time.Clock()
+
+gameDisplay = pygame.display.set_mode((display_width,display_height))
+pygame.display.set_caption('Toast')
+ 
+crashed = False
+
+x = 255
+y = 255
+x_change = 0
+y_change = 0 
+while not crashed:
+    gameDisplay.fill((50,240,0))
+    pygame.draw.rect(gameDisplay, (255,255,255),(x,y,50,50))
+    pygame.display.update()
+    for event in pygame.event.get():
+        #controls
+        if event.type == pygame.QUIT:
+            crashed = True
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_a:
+                x_change = -5
+            elif event.key == pygame.K_d:
+                x_change = 5
+            elif event.key == pygame.K_w:
+                y_change = -5
+            elif event.key == pygame.K_s:
+                y_change = 5
+            elif event.key == pygame.K_q:
+                y = 300
+                x = 500
+        #when the keys are pressed the position of the sprite cannot change
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_a or event.key == pygame.K_d:
+                x_change = 0
+            if event.key == pygame.K_w or event.key == pygame.K_s:
+                y_change = 0
+    x += x_change
+    y += y_change
+    #borders
+    if x > 950:
+        x = 0
+    if y < 0:
+        y = 550
+    if x < 0:
+        x = 950
+    if y > 550:
+        y = 0
+    
+           
+    clock.tick(60)
