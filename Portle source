@@ -17,8 +17,12 @@ y = 255
 x_change = 0
 y_change = 0 
 while not crashed:
-    gameDisplay.fill((50,240,0))
+    gameDisplay.fill((90,90,90))
     pygame.draw.rect(gameDisplay, (255,255,255),(x,y,50,50))
+   #orange portal
+    pygame.draw.rect(gameDisplay, (255,165,0),(100,200,70,70))
+   #blue portal
+    pygame.draw.rect(gameDisplay, (0,0,255),(800,300,70,70))
     pygame.display.update()
     for event in pygame.event.get():
         #controls
@@ -53,7 +57,12 @@ while not crashed:
         x = 950
     if y > 550:
         y = 0
+    if x == 100 and y == 200:
+        x = 800
+        y = 300
+    
+    
     
            
     clock.tick(60)
-//YEERR
+    
