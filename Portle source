@@ -57,12 +57,7 @@ while not crashed:
         x = 950
     if y > 550:
         y = 0
-    if x == 100 and y == 200:
+    if x < 150 and y < 250 and x > 80 and y > 180 :
         x = 800
         y = 300
-    
-    
-    
-           
-    clock.tick(60)
     
