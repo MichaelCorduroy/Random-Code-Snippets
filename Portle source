@@ -22,7 +22,7 @@ y = 255
 x_change = 0
 y_change = 0 
 while not crashed:
-
+#runs if the title needs to be made
     if title == True:
         gameDisplay.fill((255,255,255))
         gameDisplay.blit(text, (300, 100))
@@ -37,7 +37,7 @@ while not crashed:
                     title = False
 
 
-
+#game code runs here
     elif title == False:
         gameDisplay.fill((90,90,90))
         pygame.draw.rect(gameDisplay, (255,255,255),(x,y,50,50))
