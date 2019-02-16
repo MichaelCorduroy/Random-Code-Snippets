@@ -4,12 +4,17 @@ pygame.init()
 
 display_width = 1000
 display_height = 600
+title = True
 
 clock = pygame.time.Clock()
 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Toast')
- 
+
+font = pygame.font.SysFont("comicsansms", 200)
+font1 = pygame.font.SysFont("comicsansms", 75)
+text = font.render("Portal", True, (0, 128, 0))
+play = font1.render("Play", True, (0, 128, 0))
 crashed = False
 
 x = 255
@@ -17,85 +22,78 @@ y = 255
 x_change = 0
 y_change = 0 
 while not crashed:
-    gameDisplay.fill((90,90,90))
-    pygame.draw.rect(gameDisplay, (255,255,255),(x,y,50,50))
-#orange portal
-    pygame.draw.rect(gameDisplay, (255,165,0),(100,200,70,70))
-#blue portal
-    pygame.draw.rect(gameDisplay, (0,0,255),(800,300,70,70))
-#line that you can't cross
-    pygame.draw.line(gameDisplay, (0,0,0),(500,0),(500,600),15)
-    pygame.display.update()
-    for event in pygame.event.get():
-        #controls
-        if event.type == pygame.QUIT:
-            crashed = True
+
+    if title == True:
+        gameDisplay.fill((255,255,255))
+        gameDisplay.blit(text, (300, 100))
+        #pygame.display.update()
+        pygame.draw.rect(gameDisplay, (255,165,0),(400,400,200,70))
+        gameDisplay.blit(play, (440, 410))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                crashed = True
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if 400 < event.pos[0] < 600 and 400 < event.pos[1] < 470:
+                    title = False
+
+
+
+    elif title == False:
+        gameDisplay.fill((90,90,90))
+        pygame.draw.rect(gameDisplay, (255,255,255),(x,y,50,50))
+    #orange portal
+        pygame.draw.rect(gameDisplay, (255,165,0),(100,200,70,70))
+    #blue portal
+        pygame.draw.rect(gameDisplay, (0,0,255),(800,300,70,70))
+        #pygame.display.update()
+        for event in pygame.event.get():
+            #controls
+            if event.type == pygame.QUIT:
+                crashed = True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_a:
+                    x_change = -5
+                elif event.key == pygame.K_d:
+                    x_change = 5
+                elif event.key == pygame.K_w:
+                    y_change = -5
+                elif event.key == pygame.K_s:
+                    y_change = 5
+                elif event.key == pygame.K_q:
+                    y = 300
+                    x = 500
+            #when the keys are not pressed the position of the sprite cannot change
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_a or event.key == pygame.K_d:
+                    x_change = 0
+                if event.key == pygame.K_w or event.key == pygame.K_s:
+                    y_change = 0
+        x += x_change
+        y += y_change
+        #borders
+        if x > 950:
+            x = 950
+        if y < 0:
+            y = 0
+        if x < 0:
+            x = 0
+        if y > 550:
+            y = 550
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_a:
-                x_change = -5
-            elif event.key == pygame.K_d:
-                x_change = 5
-            elif event.key == pygame.K_w:
-                y_change = -5
-            elif event.key == pygame.K_s:
-                y_change = 5
-            #i have plans for this but it just messes with stuff now
-            #elif event.key == pygame.K_q:
-                #y = 300
-                #x = 500
-        #when the keys are pressed the position of the sprite cannot change
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_a or event.key == pygame.K_d:
-                x_change = 0
-            if event.key == pygame.K_w or event.key == pygame.K_s:
-                y_change = 0
-    x += x_change
-    y += y_change
-    #borders
-    if x > 950:
-        x = 950
-    if y < 0:
-        y = 0
-    if x < 0:
-        x = 0
-    if y > 550:
-        y = 550
-#line in middle that can't be crossed
-    if 460 > x > 450:
-        x = 450
-    if 500 < x < 510:
-        x = 510
-    if event.type == pygame.KEYDOWN:
-#going into orange portal
-        if event.key == pygame.K_s and x < 150 and y < 250 and x > 80 and y > 180:
-            x = 800
-            y = 370
-        elif event.key == pygame.K_d and x < 150 and y < 250 and x > 80 and y > 180:
-            x = 870
-            y = 300
-        elif event.key == pygame.K_a and x < 150 and y < 250 and x > 80 and y > 180:
-            x = 730
-            y = 300
-        elif event.key == pygame.K_w and x < 150 and y < 250 and x > 80 and y > 180:
-            x = 800
-            y = 230
-#going into blue portal
-        elif event.key == pygame.K_w and x < 850 and y < 350 and x > 780 and y > 280:
-            x = 100
-            y = 130
-        elif event.key == pygame.K_s and x < 850 and y < 350 and x > 780 and y > 280:
-            x = 100
-            y = 270
-        elif event.key == pygame.K_d and x < 850 and y < 350 and x > 780 and y > 280:
-            x = 170
-            y = 200
-        elif event.key == pygame.K_a and x < 850 and y < 350 and x > 780 and y > 280:
-            x = 30
-            y = 200
+            if event.key == pygame.K_s and x < 150 and y < 250 and x > 80 and y > 180:
+                x = 800
+                y = 370
+            elif event.key == pygame.K_d and x < 150 and y < 250 and x > 80 and y > 180:
+                x = 870
+                y = 300
+            elif event.key == pygame.K_a and x < 150 and y < 250 and x > 80 and y > 180:
+                x = 730
+                y = 300
+            elif event.key == pygame.K_w and x < 150 and y < 250 and x > 80 and y > 180:
+                x = 800
+                y = 230
         
     
-    
+    pygame.display.update()
            
     clock.tick(60)
-    
-    
