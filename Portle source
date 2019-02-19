@@ -80,18 +80,33 @@ while not crashed:
         if y > 550:
             y = 550
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_s and x < 150 and y < 250 and x > 80 and y > 180:
-                x = 800
-                y = 370
-            elif event.key == pygame.K_d and x < 150 and y < 250 and x > 80 and y > 180:
-                x = 870
-                y = 300
-            elif event.key == pygame.K_a and x < 150 and y < 250 and x > 80 and y > 180:
-                x = 730
-                y = 300
-            elif event.key == pygame.K_w and x < 150 and y < 250 and x > 80 and y > 180:
-                x = 800
-                y = 230
+          #going into orange portal
+        if event.key == pygame.K_s and x < 135 and y < 235 and x > 65 and y > 165:
+            x = 800
+            y = 370
+        elif event.key == pygame.K_d and x < 135 and y < 235 and x > 65 and y > 165:
+            x = 870
+            y = 300
+        elif event.key == pygame.K_a and x < 135 and y < 235 and x > 65 and y > 165:
+            x = 730
+            y = 300
+        elif event.key == pygame.K_w and x < 135 and y < 235 and x > 65 and y > 165:
+            x = 800
+            y = 230
+#going into blue portal
+        elif event.key == pygame.K_w and x < 835 and y < 335 and x > 765 and y > 265:
+            x = 100
+            y = 130
+        elif event.key == pygame.K_s and x < 835 and y < 335 and x > 765 and y > 265:
+            x = 100
+            y = 270
+        elif event.key == pygame.K_d and x < 835 and y < 335 and x > 765 and y > 265:
+            x = 170
+            y = 200
+        elif event.key == pygame.K_a and x < 835 and y < 335 and x > 765 and y > 265:
+            x = 30
+            y = 200
+
         
     
     pygame.display.update()
