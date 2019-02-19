@@ -9,7 +9,7 @@ title = True
 clock = pygame.time.Clock()
 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
-pygame.display.set_caption('Toast')
+pygame.display.set_caption('Portle')
 
 font = pygame.font.SysFont("comicsansms", 200)
 font1 = pygame.font.SysFont("comicsansms", 75)
@@ -17,17 +17,23 @@ text = font.render("Portal", True, (0, 128, 0))
 play = font1.render("Play", True, (0, 128, 0))
 crashed = False
 
+x_change = 0
 x = 255
 y = 255
+r = x
+u = y
 x_change = 0
-y_change = 0 
+y_change = 0
+r_change = 0
+u_change = 0
+portal = False
 while not crashed:
 #runs if the title needs to be made
     if title == True:
         gameDisplay.fill((255,255,255))
         gameDisplay.blit(text, (300, 100))
         #pygame.display.update()
-        pygame.draw.rect(gameDisplay, (255,165,0),(400,400,200,70))
+        pygame.draw.rect(gameDisplay, (255,165,0),(400,420,200,69+31))
         
         gameDisplay.blit(play, (440, 410))
         for event in pygame.event.get():
@@ -45,7 +51,7 @@ while not crashed:
     #orange portal
         pygame.draw.rect(gameDisplay, (255,165,0),(100,200,70,70))
     #blue portal
-        pygame.draw.rect(gameDisplay, (0,0,255),(800,300,70,70))
+        
     #line that you can't cross
         pygame.draw.line(gameDisplay, (0,0,0),(500,0),(500,600),15)
         #pygame.display.update()
@@ -63,8 +69,7 @@ while not crashed:
                 elif event.key == pygame.K_s:
                     y_change = 5
                 elif event.key == pygame.K_q:
-                    y = 300
-                    x = 500
+                    portal = True
             #when the keys are not pressed the position of the sprite cannot change
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_a or event.key == pygame.K_d:
@@ -73,6 +78,8 @@ while not crashed:
                     y_change = 0
         x += x_change
         y += y_change
+        r += r_change
+        u += u_change
         #borders
         if x > 950:
             x = 950
@@ -87,36 +94,49 @@ while not crashed:
             x = 450
         if 500 < x < 510:
             x = 510
-        if event.type == pygame.KEYDOWN:
-        #going into orange portal
-            if event.key == pygame.K_s and x < 135 and y < 235 and x > 65 and y > 165:
-                x = 800
-                y = 370
-            elif event.key == pygame.K_d and x < 135 and y < 235 and x > 65 and y > 165:
-                x = 870
-                y = 300
-            elif event.key == pygame.K_a and x < 135 and y < 235 and x > 65 and y > 165:
-                x = 730
-                y = 300
-            elif event.key == pygame.K_w and x < 135 and y < 235 and x > 65 and y > 165:
-                x = 800
-                y = 230
-    #going into blue portal
-            elif event.key == pygame.K_w and x < 835 and y < 335 and x > 765 and y > 265:
-                x = 100
-                y = 130
-            elif event.key == pygame.K_s and x < 835 and y < 335 and x > 765 and y > 265:
-                x = 100
-                y = 270
-            elif event.key == pygame.K_d and x < 835 and y < 335 and x > 765 and y > 265:
-                x = 170
-                y = 200
-            elif event.key == pygame.K_a and x < 835 and y < 335 and x > 765 and y > 265:
-                x = 30
-                y = 200
-
+        r_change = x_change
+        u_change = y_change
+        if portal == True: 
+            r_change = 0
+            u_change = 0
+            drawme(r,u)
+            if event.type == pygame.KEYDOWN:
+    #going into the new portle
+                if event.key == pygame.K_s and x < r+400+35 and x > r+400-35 and y < u+35 and y > u-35:
+                    x = 100
+                    y = 270
+                elif event.key == pygame.K_w and x < r+400+35 and x > r+400-35 and y < u+35 and y > u-35:
+                    x = 100
+                    y = 130
+                elif event.key == pygame.K_a and x < r+400+35 and x > r+400-35 and y < u+35 and y > u-35:
+                    x = 30
+                    y = 200
+                elif event.key == pygame.K_d and x < r+400+35 and x > r+400-35 and y < u+35 and y > u-35:
+                    x = 170
+                    y = 200
+    #going into the orange boi
+                elif event.key == pygame.K_s and x < 135 and y < 235 and x > 65 and y > 165:
+                    x = r+400
+                    y = u+70
+                elif event.key == pygame.K_d and x < 135 and y < 235 and x > 65 and y > 165:
+                    x = r+400+70
+                    y = u
+                elif event.key == pygame.K_a and x < 135 and y < 235 and x > 65 and y > 165:
+                    x = r+400-70
+                    y = u
+                elif event.key == pygame.K_w and x < 135 and y < 235 and x > 65 and y > 165:
+                    x = r+400
+                    y = u-70
+                
+                        
         
-    
+        #while not portal:
+            #pygame.draw.rect(gameDisplay,(90,90,90),(x+400,y,70,70))
+            
     pygame.display.update()
-           
+               
     clock.tick(60)
+        
+    def drawme(r,u):
+            pygame.draw.rect(gameDisplay,(0,0,255),(r+400,u,70,70))
+
