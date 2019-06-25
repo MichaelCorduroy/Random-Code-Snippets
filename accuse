@@ -1,62 +1,57 @@
 import pygame
 from random import randint
 
-
 pygame.init()
 
-speed  = int(input("What is the speed at which you want it to learn?"))
+speed = int(input("What is the speed at which you want it to learn?"))
 tries = 1
 display_width = 1000
 display_height = 850
 
 f = randint(0, 400)
-g = randint(0,400)
-h = randint(0,400)
-l = randint(0,400)
+g = randint(0, 400)
+h = randint(0, 400)
+l = randint(0, 400)
 
+black = (0, 0, 0)
+white = (255, 255, 255)
 
-black = (0,0,0)
-white = (255,255,255)
+red = (200, 0, 0)
+green = (0, 200, 0)
 
-red = (200,0,0)
-green = (0,200,0)
+bright_red = (255, 0, 0)
+bright_green = (0, 255, 0)
 
-bright_red = (255,0,0)
-bright_green = (0,255,0)
- 
-block_color = (53,115,255)
+block_color = (53, 115, 255)
 
 clock = pygame.time.Clock()
 
-
 memory = []
 
-
 allmemory = []
-num = randint(1,6)
+num = randint(1, 6)
 
 memory.append(num)
 print(num)
 
-gameDisplay = pygame.display.set_mode((display_width,display_height))
-gameDisplay.fill((255,255,255))
+gameDisplay = pygame.display.set_mode((display_width, display_height))
+
 pygame.display.set_caption('Square Powered With Machine Learning')
-
-
 
 crashed = False
 
 x = 375
 y = 450
 
-
-pygame.draw.rect(gameDisplay, black,(x,y,50,50))
+pygame.draw.rect(gameDisplay, black, (x, y, 50, 50))
 
 x_change = 0
 y_change = 0
 
-def car(x,y):
-	pygame.draw.rect(gameDisplay, black,(x,y,50,50))
+
+def car(x, y):
+    pygame.draw.rect(gameDisplay, black, (x, y, 50, 50))
+
 
 moveme = True
 
@@ -67,53 +62,54 @@ u = 0
 t = 0
 s = 0
 
-moves = [1,2,3,4]
+moves = [1, 2, 3, 4]
 quad1 = False
 quad2 = False
 quad3 = True
 quad4 = False
 while not crashed:
 
-    dist = (abs((920 - x))**2 + abs((170 - y)))**1/2
-    
+    vv = randint(0,255)
+    vq = randint(0,255)
+    vw = randint(0,255)
 
+    gameDisplay.fill((vv, vq, vw))
+    dist = (abs((920 - x)) ** 2 + abs((170 - y))) ** 1 / 2
 
-    num = randint(1,len(moves))
+    num = randint(1, len(moves))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             crashed = True
-      
-    #quadrants
+
+    # quadrants
     if x < 525 and y > 400:
         quad1 = False
         quad2 = False
         quad3 = True
         quad4 = False
-        
+
     elif x > 525 and y > 400:
         quad1 = False
         quad2 = False
         quad3 = False
         quad4 = True
-        
+
     elif x > 525 and y < 250:
         quad1 = True
         quad2 = False
         quad3 = False
         quad4 = False
-        
+
     elif x < 525 and y < 400:
         quad1 = False
         quad2 = True
         quad3 = False
         quad4 = False
-        
 
-
-#boundaries 
+    # boundaries
     if x <= 133 and y > 50 and y < 850:
-        #x = 133 
+        # x = 133
         if quad1:
             for b in range(speed):
                 moves.append(2)
@@ -123,16 +119,16 @@ while not crashed:
         if quad3:
             for b in range(speed):
                 moves.append(1)
-                
+
         if quad4:
             for b in range(speed):
                 moves.append(1)
-        tries+=1
+        tries += 1
         x = 375
         y = 450
 
     if y >= 740:
-       # y = 740
+        # y = 740
         if quad1:
             for b in range(speed):
                 moves.append(2)
@@ -142,16 +138,16 @@ while not crashed:
         if quad3:
             for b in range(speed):
                 moves.append(1)
-                
+
         if quad4:
             for b in range(speed):
                 moves.append(1)
-        tries+=1
+        tries += 1
         x = 375
         y = 450
-       
+
     if y <= 135:
-       # y = 135
+        # y = 135
         if quad1:
             for b in range(speed):
                 moves.append(2)
@@ -161,15 +157,15 @@ while not crashed:
         if quad3:
             for b in range(speed):
                 moves.append(1)
-                
+
         if quad4:
             for b in range(speed):
                 moves.append(1)
-        tries+=1
+        tries += 1
         x = 375
         y = 450
     if x >= 875 and y >= 225 or x >= 875 and y <= 155:
-       # x = 875
+        # x = 875
         if quad1:
             for b in range(speed):
                 moves.append(2)
@@ -179,75 +175,63 @@ while not crashed:
         if quad3:
             for b in range(speed):
                 moves.append(1)
-                
+
         if quad4:
             for b in range(speed):
                 moves.append(1)
-        tries+=1
+        tries += 1
         x = 375
         y = 450
-    
+
     if x > 950:
         print("HOORAY! DONE! Took me only {} tries!".format(tries))
         quit()
 
-        
         ######################
     ##
-       
-    if moves[num-1] == 2:
-	    
-	    x += 5
-	    q += 1
-	    num = randint(1,len(moves))
-	    z = "right"
-	    
-    
-    if moves[num-1] == 4:
-	    
-	    x -= 5
-	    s += 1
-	    num = randint(1,len(moves))
-	    z = "left"
-	   
-    
-    if moves[num-1] == 3:
-	    
-	    y += 5
-	    t += 1
-	    num = randint(1,len(moves))
-	    z = "down"
-	    
 
-    if moves[num-1] == 1:
-	    y -= 5
-	    u += 30
-	    num = randint(1,len(moves))
-	    z = "up"
-	    
-     
+    if moves[num - 1] == 2:
+        x += 5
+        q += 1
+        num = randint(1, len(moves))
+        z = "right"
+
+    if moves[num - 1] == 4:
+        x -= 5
+        s += 1
+        num = randint(1, len(moves))
+        z = "left"
+
+    if moves[num - 1] == 3:
+        y += 5
+        t += 1
+        num = randint(1, len(moves))
+        z = "down"
+
+    if moves[num - 1] == 1:
+        y -= 5
+        u += 30
+        num = randint(1, len(moves))
+        z = "up"
 
     x += x_change
     y += y_change
-    #print(dist)
-    
+    # print(dist)
 
-
-
-    gameDisplay.fill((82,188,91))
-    car(x,y)
-    #left
-    pygame.draw.rect(gameDisplay, black,(100,100,30,700))
-    #bottom
-    pygame.draw.rect(gameDisplay, black,(100,790,850,30))
-    #top
-    pygame.draw.rect(gameDisplay, black,(125,100,825,30))
-    #lil top
-    pygame.draw.rect(gameDisplay, black,(920,125,30,30))
-    #right bottom
-    pygame.draw.rect(gameDisplay, black,(925,250,30,600))
-    #draw one
-    #pygame.draw.rect(gameDisplay, black,(f,g,h,l))
+    #gameDisplay.fill((82, 188, 91))
+    car(x, y)
+    # left
+    pygame.draw.rect(gameDisplay, black, (100, 100, 30, 700))
+    # bottom
+    pygame.draw.rect(gameDisplay, black, (100, 790, 850, 30))
+    # top
+    pygame.draw.rect(gameDisplay, black, (125, 100, 825, 30))
+    # lil top
+    pygame.draw.rect(gameDisplay, black, (920, 125, 30, 30))
+    # right bottom
+    pygame.draw.rect(gameDisplay, black, (925, 250, 30, 600))
+    # draw one
+    # pygame.draw.rect(gameDisplay, black,(f,g,h,l))
 
     pygame.display.update()
     clock.tick(60)
