@@ -1,0 +1,78 @@
+import numpy as np
+import math
+import pygame
+
+display_width = 1000
+display_height = 600
+
+
+x = 200
+y = 470
+z = 1200
+
+
+colli = False
+matt = 0
+
+
+
+x_change = 0
+y_change = 0
+gameDisplay = pygame.display.set_mode((display_width, display_height))
+pygame.display.set_caption('The square with cool hair')
+won  = False
+
+
+'''
+def relu(val):
+    return np.maximum(0,val)
+'''
+
+
+while not won:
+    gameDisplay.fill((255, 255, 255))
+    pygame.draw.rect(gameDisplay, (0, 0, 0), (0, 500, 1000, 600))
+    #player
+    pygame.draw.rect(gameDisplay, (157, 158, 160), (x, y, 30, 30))
+    t = pygame.draw.rect(gameDisplay, (255, 0, 0), (z, 440, 60, 60))
+    rr = pygame.draw.line(gameDisplay, (0, 255, 0), (x, y + 15), (x + 400, y + 15), 3)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            won = True
+
+    if rr.colliderect(t):
+        colli = True
+
+    z -= 0.5
+
+    yv = y
+
+    if colli == True:
+        matt = 1.0
+    elif colli == False:
+        matt = 0.0
+
+    x0 = np.array([matt, yv])
+
+    np.random.seed(1)
+    syn0 = 2 * np.random.random((2,1)) - 1
+
+    l0 = x0
+    l1 = math.tanh(np.dot(l0, syn0))
+
+
+    print(syn0)
+    #print(l1)
+
+
+    if l1 == 1.0:
+        y_change -= 0.0001
+
+
+    if y >= 470:
+        y = 470
+
+    if y <= 0:
+        y = 0
+    y += y_change
+    pygame.display.update()
