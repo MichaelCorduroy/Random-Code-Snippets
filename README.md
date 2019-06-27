@@ -40,7 +40,35 @@ import tensorflow as tf
 
 IMAGE RECOGNITION
 
-Image recognin
+Image recognition
+
+A common usage of modern computing is image recognition.
+
+Building your own Neural Net
+
+Most machine learning-powered image recognition usues a technique called convolutional layers.
+
+These neural network layers are somewhat similar to how neurons in the brain process visual data.
+
+CONVOLUTIONAL NEURAL NETWORK
+
+Neural networks learn to accomplish their tasks by reading training data and adjusting their neuron weights to imporve their chance of choosing the correct answer.
+
+Densely connected networks, like the one you created earlier, work well for smaller training data, but image recognition requires processing much larger data
+
+Convolutional neural networks imitate the structure of neurons that process images in the brain and use techniques to reduce neuron count, as well as maintainingg positional relationships in the data.
+
+These networks are ideal for the task of learning information about what's in an image
+
+BUILDING YOUR NETWORK
+
+In order to make tuning parameters and make changes to yout network more easily, you'll create a class that sets up the neural network architecture in TensorFlow.
+
+STEPS
+
+Input Layers:
+
+The first step in your network will be creating placeholders you can use to feed data into the network. You'll create these placeholders as class variables for easy access later.
 
 
 
