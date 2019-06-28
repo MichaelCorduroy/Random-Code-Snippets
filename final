@@ -1,0 +1,99 @@
+import pygame
+import random
+
+
+display_width = 1000
+display_height = 600
+
+pygame.mixer.init()
+
+pygame.mixer.music.load('/home/student/Downloads/2YvB.mp3')
+x = 200
+y = 470
+v = 0
+moves = [-1, 0, 1]
+memory = []
+z = 1200
+place = 0
+
+y_change = 0
+tell = []
+gameDisplay = pygame.display.set_mode((display_width, display_height))
+pygame.display.set_caption("The square with cool hair version 0.0.2")
+won = False
+
+
+while not won:
+    b = random.randint(0, 255)
+    t = random.randint(0, 255)
+    g = random.randint(0, 255)
+    #draw background
+    gameDisplay.fill((255,255,255))
+    #draw the floor
+    pygame.draw.rect(gameDisplay, (0, 0, 0), (0, 500, 1000, 600))
+    #draw the player
+    player = pygame.draw.rect(gameDisplay, (157,158,160), (x, y, 30, 30))
+
+    #draw the obstacles
+    obs1 =  pygame.draw.rect(gameDisplay, (255, 0, 0), (z, 440, 60, 60))
+    obs2 =  pygame.draw.rect(gameDisplay, (255, 0, 0), (z + 200, 240, 60, 60))
+    obs3 = pygame.draw.rect(gameDisplay, (255, 0, 0), (z + 540, 220, 60, 60))
+    obs4 = pygame.draw.rect(gameDisplay, (255, 0, 0), (z + 750, 360, 60, 60))
+    obs5 = pygame.draw.rect(gameDisplay, (255, 0, 0), (z + 1150, 220, 60, 60))
+    obs6 = pygame.draw.rect(gameDisplay, (255, 0, 0), (z + 1420, 420, 60, 60))
+    obs7 = pygame.draw.rect(gameDisplay, (255, 0, 0), (z + 1620, 440, 60, 60))
+    obs8 = pygame.draw.rect(gameDisplay, (255, 0, 0), (z + 1890, 140, 60, 60))
+    obs9 = pygame.draw.rect(gameDisplay, (255, 0, 0), (z + 2000, 640, 60, 60))
+    obs10 = pygame.draw.rect(gameDisplay, (255, 0, 0), (z + 2500, 240, 60, 60))
+    obs11 = pygame.draw.rect(gameDisplay, (255, 0, 0), (z + 2210, 140, 60, 60))
+    obs12 = pygame.draw.rect(gameDisplay, (255,0, 0), (z + 600, 0, 60, 60))
+
+
+
+    tell = [obs1, obs2, obs3, obs4, obs5, obs6, obs7, obs8, obs9, obs10,obs11, obs12 ]
+
+    #event handler
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            won = True
+
+
+    if v % 100 == 0:
+
+        for hh in memory:
+            y_change = memory[hh]
+            y += y_change
+
+
+        r = random.randint(0,len(moves) - 1)
+
+        y_change = moves[r]
+
+        memory.append(moves[r])
+
+    for rect in tell:
+        if player.colliderect(rect):
+            #pygame.mixer.music.play(0)
+            z = 1200
+            v = 0
+            x = 200
+            y = 470
+            del memory[len(memory)-1]
+            #print(memory)
+
+
+    z -= 1
+    v += 1
+
+    if y >= 470:
+        y = 470
+
+    if y <= 0:
+        y = 0
+
+    y += y_change
+    #gameDisplay.fill((t,g,b))
+    pygame.display.update()
+
+
+
