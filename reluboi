@@ -1,0 +1,108 @@
+import numpy as np
+import math
+import pygame
+import random
+
+display_width = 1000
+display_height = 600
+
+
+x = 200
+y = 470
+z = 1200
+v = 0
+ii = 0
+
+frontC = False
+topC = False
+bottomC = False
+front = 0.0
+top = 0.0
+bottom = 0.0
+u = [-1, 0,1]
+u1 = [-1,0,1]
+u2 = [-1,0,1]
+u3 = [-1,0,1]
+
+
+x_change = 0
+y_change = 0
+gameDisplay = pygame.display.set_mode((display_width, display_height))
+pygame.display.set_caption('The square with cool hair')
+won  = False
+
+
+'''
+def relu(val):
+    return np.maximum(0,val)
+'''
+
+tee = []
+while not won:
+
+    gameDisplay.fill((255, 255, 255))
+    pygame.draw.rect(gameDisplay, (0, 0, 0), (0, 500, 1000, 600))
+    #player
+    player = pygame.draw.rect(gameDisplay, (157, 158, 160), (x, y, 30, 30))
+    t = pygame.draw.rect(gameDisplay, (255, 0, 0), (z, 440, 60, 60))
+    rr = pygame.draw.line(gameDisplay, (0, 255, 0), (x, y + 15), (x + 400, y + 15), 1)
+    rrr = pygame.draw.line(gameDisplay, (0,255,0), (x + 15, y ), (x + 15, y + 400), 1)
+    rrrr = pygame.draw.line(gameDisplay, (0,255,0), (x + 15, y ), (x + 15, y - 400), 1)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            won = True
+
+    #front collision
+    if rr.colliderect(t):
+        front = 1.0
+
+    elif  not rr.colliderect(t):
+        front = 0
+
+    #bottom collision
+    if rrr.colliderect(t):
+        bottom = 1.0
+
+    elif not rrr.colliderect(t):
+        bottom = 0.0
+
+    #top collision
+    if rrrr.colliderect(t):
+        top = 1.0
+
+    elif not rrrr.colliderect(t):
+        top = 0.0
+
+    z -= 0.5
+
+    yv = y
+    '''''
+    if front == 1.0:
+        pass
+    if top == 1.0:
+        e = random.randint(0, len(u1))
+        movee = u1[e]
+    if bottom == 1.0:
+       pass
+
+    else:
+    '''
+
+    ff = [front, top, bottom]
+
+
+
+    #whether collided top, front, bottom,
+    x0 = np.array([ff])
+
+    np.random.seed(1)
+    syn0 = 2 * np.random.random((3,1)) - 1
+
+    l0 = x0
+    l1 = math.tanh(np.dot(l0, syn0))
+    #print(l1)
+
+
+
+
+
