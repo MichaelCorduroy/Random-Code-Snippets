@@ -102,7 +102,7 @@ while not won:
     l1 = math.tanh(np.dot(l0, syn0))
     #print(l1)
 
-
+#
 
 
 
