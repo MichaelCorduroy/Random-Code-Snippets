@@ -1,0 +1,191 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Simple Agile Planning Board</title>
+
+<style>
+body
+{
+font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#board
+{
+width: 910px;
+min-height:100px;
+
+position:relative;
+}
+
+.title
+{
+background-color:#52460a;
+text-align:center;
+color:white;
+padding: 2px 0px;
+}
+
+#inprogress
+{
+left:302px;
+}
+
+#testing
+{
+left:604px;
+}
+
+#bugfixes 
+{
+left:906px
+}
+
+#done
+{
+left:1208px
+}
+
+#peerreview 
+{
+left:1510px
+}
+
+#publication
+{
+left:1812px
+}
+
+
+#todo, #inprogress, #testing, #bugfixes, #done, #peerreview, #publication
+{
+background-color: tan;
+
+position:absolute;
+
+width: 300px;
+min-height:150px;
+border: 2px solid black;
+
+}
+
+*[draggable=true]
+{
+float:left;
+min-width: 50px;
+min-height: 50px;
+border: 2px solid black;
+margin: 10px;
+
+font-weight:bold;
+
+min-height:60px;
+background-image: -webkit-gradient(linear,
+             left top, left bottom,
+color-stop(0.63, white),
+             color-stop(0.92, rgb(5,161,245)));
+                    background-image:-moz-linear-gradient(
+                        center top,
+                        white 63%,
+                        rgb(5,161,245) 92%
+                    );
+             -webkit-background-size:1px 8px;
+             -moz-background-size:1px 8px;
+             background-size:1px 8px;
+background-repeat:repeat;
+}
+
+.cardTitle
+{
+background-color: rgb(255,255,255);
+border:2px solid white;
+}
+
+</style>
+</head><body>
+    <div id="board">
+        <div id="todo">
+         <div class="title">To Do</div>
+        <div id="item1" draggable="true">
+            <div class="cardTitle">
+                List ordering
+            </div>
+        </div>
+        <div id="item2" draggable="true">
+            <div class="cardTitle">
+                User adds
+            </div>
+        </div>
+        <div id="item3" draggable="true">
+                <div class="cardTitle">
+                    User profiles
+                </div>
+            </div>
+            <div id="item4" draggable="true">
+                    <div class="cardTitle">
+                        Graduation Algorithm
+                    </div>
+                </div>
+                <div id="item5" draggable="true">
+                        <div class="cardTitle">
+                            Password Usage
+                        </div>
+                    </div>
+                    <div id="item6" draggable="true">
+                            <div class="cardTitle">
+                                Email Verification
+                            </div>
+                        </div>
+         <!--<div id="item3" draggable="true">Make an amazing site</div>
+<div id="item4" draggable="true">Impress my friends</div>-->
+        </div>
+<div id="inprogress">
+<div class="title">In Progress</div>
+</div>
+
+<div id="testing">
+        <div class="title">Beta Finish</div>
+        </div>
+
+<div id="bugfixes">
+        <div class="title">Bug-Fixes</div>
+        </div>
+
+<div id="done">
+        <div class="title">Final Copy</div>
+        </div>
+
+<div id="peerreview">
+<div class="title">Peer-Review</div>
+</div>
+
+<div id="publication">
+        <div class="title">Publication</div>
+        </div>
+
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js">
+        </script>
+
+<script type="text/javascript">
+$('document').ready(init);
+
+        function init(){
+            $('#item1, #item2, #item3, #item4, #item5, #item6').bind('dragstart', function(event) {
+                event.originalEvent.dataTransfer.setData("text/plain", event.target.getAttribute('id'));
+            });
+            
+   // bind the dragover event on the board sections
+            $('#todo, #inprogress, #testing, #bugfixes, #done, #peerreview, #publication').bind('dragover', function(event) {
+                event.preventDefault();
+            });
+
+// bind the drop event on the board sections
+   $('#todo, #inprogress, #testing, #bugfixes, #done, #peerreview, #publication').bind('drop', function(event) {
+            var notecard = event.originalEvent.dataTransfer.getData("text/plain");
+            event.target.appendChild(document.getElementById(notecard));
+// Turn off the default behaviour
+// without this, FF will try and go to a URL with your id's name
+            event.preventDefault();
+});
+        }
+</script>
+
+</div></body></html>
