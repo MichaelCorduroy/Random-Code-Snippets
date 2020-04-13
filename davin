@@ -1,0 +1,27 @@
+def pred_text(sample_file, new_file, max_characters):
+
+    f = open(sample_file)
+
+    v = f.read()
+
+    primlist = []
+    innerList = []
+    y = v.split()
+    introWord = []
+
+    for i in range(len(y)):
+        if y[i] not in primlist:
+            primlist.append(y[i])
+
+    for n in range(len(primlist)):
+        x = []
+        for j in range(len(y)):
+            
+            if primlist[n] == y[j]:
+                if j < len(y)-1:
+                    x.append(y[j + 1])
+                    if j == 0 or '.' in y[j-1]:
+                        introWord.append(y[j])
+                else:
+                    x.append(" ")
+        innerList.append(x)
