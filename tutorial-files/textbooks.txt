@@ -1,0 +1,13 @@
+**Textbooks**
+
+
+*CIS392*
+
+-Engineering Ethics: Concepts and Cases (PDFDrive)
+https://etica.uazuay.edu.ec/sites/etica.uazuay.edu.ec/files/public/Engineering%20Ethics_%20Concepts%20and%20Cases%20%28%20PDFDrive%20%29.pdf
+
+
+*CSE389*
+
+-TCP/IP Sockets in Java (PDFDrive)
+http://ommolketab.ir/aaf-lib/ae09403cgqhxa2jay4vp5lp88wvgbi.pdf
